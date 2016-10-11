@@ -1,5 +1,6 @@
 var fs = require("fs");
 var Handlebars = require("handlebars");
+var moment = require("moment");
 
 function render(resume) {
     // Load css and template
@@ -51,6 +52,18 @@ function render(resume) {
     // http://stackoverflow.com/a/18831911
     Handlebars.registerHelper('commalist', function(items, options) {
         return options.fn(items.join(', '));
+    });
+    //  format an ISO date using Moment.js
+    //  http://momentjs.com/
+    //  moment syntax example: moment(Date("2011-07-18T15:50:52")).format("MMMM YYYY")
+    //  usage: {{dateFormat creation_date format="MMMM YYYY"}}
+    Handlebars.registerHelper('dateFormat', function (context, block) {
+        if (moment) {
+            var f = block.hash.format || "MMM Do, YYYY";
+            return moment(context).format(f);
+        } else {
+            return context;   //  moment plugin not available. return data as is.
+        };
     });
     // Compile
     return Handlebars.compile(template)({

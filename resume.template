@@ -57,63 +57,7 @@
               </div>
             </div>
           </section>
-          <!-- LOCATION -->
-          {{#location}}
-            {{#ifCond address '||' city}}
-              <section class="content">
-                <div class="row">
-                  <div class="content-cat">
-                    Location
-                  </div>
-                  <div class="content-text">
-                    {{#if address}}
-                      <ul>
-                        <li>Address</li>
-                        <li>{{address}}</li>
-                      </ul>
-                    {{/if}}
-                    {{#if city}}
-                      {{#if postalCode}}
-                        <ul>
-                          <li>Postal Code & City</li>
-                          <li>{{postalCode}} {{city}}</li>
-                        </ul>
-                      {{/if}}
-                    {{/if}}
-                    {{#if region}}
-                      <ul>
-                        <li>Region</li>
-                        <li>{{region}}</li>
-                      </ul>
-                    {{/if}}
-                  </div>
-                </div>
-              </section>
-            {{/ifCond}}
-          {{/location}}
       {{/resume.basics}}
-        <!-- LANGUAGE -->
-          {{#if resume.languages.length}}
-            <section class="content">
-              <div class="row">
-                <div class="content-cat">
-                  Languages
-                </div>
-                <div class="content-text">
-                  {{#each resume.languages}}
-                    <ul>
-                      {{#if language}}
-                        <li>{{language}}</li>
-                      {{/if}}
-                      {{#if fluency}}
-                        <li>{{fluency}}</li>
-                      {{/if}}
-                    </ul>
-                  {{/each}}
-                </div>
-              </div>
-            </section>
-          {{/if}}
           {{#resume.basics}}
             <!-- PROFILES -->
             {{#if profiles.length}}
@@ -128,7 +72,7 @@
                         {{#if network}}
                           <li>
                             <a href="{{url}}" target="_blank">
-                              {{network}}
+                              {{network}}: {{username}}
                             </a>
                           </li>
                         {{/if}}
@@ -153,7 +97,7 @@
                       {{/if}}
                       {{#if startDate}}
                         {{#if endDate}}
-                          <p>{{startDate}} till {{endDate}}</p>
+                          <p>{{dateFormat startDate format="MM/YYYY"}} through {{dateFormat endDate format="MM/YYYY"}}</p>
                         {{/if}}
                       {{/if}}
                     </div>
@@ -177,9 +121,6 @@
                         {{/ifCond}}
                         </p>
                       {{/ifCond}}
-                      {{#if summary}}
-                        <p>{{summary}}</p>
-                      {{/if}}
                       {{#if highlights.length}}
                         {{#each highlights}}
                           <p class="highlight">{{.}}</p>
@@ -234,7 +175,7 @@
                       {{/if}}
                       {{#if startDate}}
                         {{#if endDate}}
-                          <p>{{startDate}} till {{endDate}}</p>
+                          <p>{{dateFormat startDate format="MM/YYYY"}} through {{dateFormat endDate format="MM/YYYY"}}</p>
                         {{/if}}
                       {{/if}}
                     </div>
@@ -247,14 +188,12 @@
                         {{/if}}
                       {{/if}}
                       {{#if area}}
-                        {{#if gpa}}
                         <p class="highlight">
                           {{#if studyType}}
                           {{studyType}}:
                           {{/if}}
-                          <i>{{area}} ({{gpa}})</i>
+                          <i>{{area}}</i>
                         </p>
-                        {{/if}}
                       {{/if}}
                     </div>
                   </div>
